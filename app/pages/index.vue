@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const grayscale = ref(true);
+// One random photo per section, fixed for the browser session.
+const sectionImages = useSectionImages();
 const showcaseOpen = ref(false);
 const originRect = ref<{
   top: number;
@@ -10,7 +12,8 @@ const originRect = ref<{
 const showcasePanel = ref<InstanceType<typeof ShowcasePanel> | null>(null);
 
 function openShowcase() {
-  const el = showcasePanel.value?.triggerEl;
+  // The overlay grows out of the white showcase card, so measure the card.
+  const el = showcasePanel.value?.panelEl;
   const r = el?.getBoundingClientRect();
   originRect.value = r
     ? { top: r.top, left: r.left, width: r.width, height: r.height }
@@ -34,35 +37,23 @@ onMounted(() => {
 <template>
   <div class="flex flex-col">
     <div
-      class="flex min-h-screen w-full items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)] scroll-snap-align-center"
-    >
-      <HeroPanel :grayscale="grayscale" />
+      class="flex min-h-screen w-full snap-center items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)]">
+      <HeroPanel :grayscale="grayscale" :image="sectionImages.hero" />
     </div>
     <div
-      class="flex min-h-screen w-full items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)] scroll-snap-align-center"
-    >
-      <AboutPanel :grayscale="grayscale" />
+      class="flex min-h-screen w-full snap-center items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)]">
+      <AboutPanel :grayscale="grayscale" :image="sectionImages.about" />
     </div>
     <div
-      class="flex min-h-screen w-full items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)] scroll-snap-align-center"
-    >
-      <ShowcasePanel
-        ref="showcasePanel"
-        :grayscale="grayscale"
-        @open="openShowcase"
-      />
+      class="flex min-h-screen w-full snap-center items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)]">
+      <ShowcasePanel ref="showcasePanel" :grayscale="grayscale" :image="sectionImages.showcase"
+        @open="openShowcase" />
     </div>
     <div
-      class="flex min-h-screen w-full items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)] scroll-snap-align-center"
-    >
+      class="flex min-h-screen w-full snap-center items-center justify-center box-border p-6 px-[clamp(16px,4vw,64px)]">
       <ContactPanel />
     </div>
 
-    <ShowcaseLightbox
-      :open="showcaseOpen"
-      :origin-rect="originRect"
-      :grayscale="grayscale"
-      @close="closeShowcase"
-    />
+    <ShowcaseLightbox :open="showcaseOpen" :origin-rect="originRect" :grayscale="grayscale" @close="closeShowcase" />
   </div>
 </template>
