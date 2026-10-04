@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
       </div>
       <div class="columns-3 gap-4 px-[clamp(20px,3vw,48px)] pb-12 pt-2 [column-width:260px]"
         :class="grayscale ? 'grayscale' : ''">
-        <img v-for="img in gallery" :key="img.src" :src="img.src" :alt="img.alt" loading="lazy"
+        <img v-for="img in gallery" :key="img.src" :src="withBase(img.src)" :alt="img.alt" loading="lazy"
           class="mb-4 block w-full break-inside-avoid" />
       </div>
     </div>

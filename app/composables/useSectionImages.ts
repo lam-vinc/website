@@ -1,4 +1,5 @@
 export interface SectionImage {
+  /** Path under public/. Render it through withBase(), not as-is. */
   src: string;
   alt: string;
   /**

@@ -29,7 +29,7 @@ watch(
        anywhere over the band — including the showcase's click overlay —
        brings the photo back into colour. -->
   <div class="h-full w-full overflow-hidden bg-hairline">
-    <img v-if="image" ref="imgEl" :key="image.src" :src="image.src" :alt="image.alt"
+    <img v-if="image" ref="imgEl" :key="image.src" :src="withBase(image.src)" :alt="image.alt"
       :style="image.position ? { objectPosition: image.position } : undefined"
       :fetchpriority="eager ? 'high' : undefined" :loading="eager ? 'eager' : 'lazy'"
       :class="[loaded ? 'is-loaded' : '', grayscale ? 'is-mono' : '']"
