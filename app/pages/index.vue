@@ -54,6 +54,6 @@ onMounted(() => {
       <ContactPanel />
     </div>
 
-    <ShowcaseLightbox :open="showcaseOpen" :origin-rect="originRect" :grayscale="grayscale" @close="closeShowcase" />
+    <ShowcaseLightbox :open="showcaseOpen" :origin-rect="originRect" @close="closeShowcase" />
   </div>
 </template>

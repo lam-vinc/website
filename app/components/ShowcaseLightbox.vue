@@ -7,7 +7,6 @@ const props = defineProps<{
     width: number;
     height: number;
   } | null;
-  grayscale: boolean;
 }>();
 const emit = defineEmits<{ close: [] }>();
 
@@ -121,8 +120,7 @@ onBeforeUnmount(() => {
           Close ✕
         </button>
       </div>
-      <div class="columns-3 gap-4 px-[clamp(20px,3vw,48px)] pb-12 pt-2 [column-width:260px]"
-        :class="grayscale ? 'grayscale' : ''">
+      <div class="columns-3 gap-4 px-[clamp(20px,3vw,48px)] pb-12 pt-2 [column-width:260px]">
         <img v-for="img in gallery" :key="img.src" :src="withBase(img.src)" :alt="img.alt" loading="lazy"
           class="mb-4 block w-full break-inside-avoid" />
       </div>
